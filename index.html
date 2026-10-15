@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111b24">
+  <meta name="description" content="Good taste. Dumb luck. Spin a wheel of top-rated Letterboxd films and find your next great watch.">
+  <title>Reel Luck — Find your next great watch</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="movies.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header wrap">
+    <a class="brand" href="./" aria-label="Reel Luck home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M4 12h22v13H4zM4 12l-1-6 21-4 1 6-21 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m8 5 5 5m3-7 5 5M10 17v4m6-4v4m6-4v4" stroke="currentColor" stroke-width="2"/></svg><span>REEL LUCK<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Main navigation"><button class="nav-button" id="browse-button">The collection <span class="nav-count" id="total-count">40</span></button><button class="nav-button" id="watchlist-button">Watchlist <span class="nav-count" id="watchlist-count">0</span></button><button id="sound-button" class="icon-button" aria-label="Enable spin sounds" aria-pressed="false" title="Enable spin sounds"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m11 5-5 4H3v6h3l5 4V5zm5 4 5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></nav>
+  </header>
+
+  <main class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <div><div class="eyebrow"><span class="three-dots" aria-hidden="true"><i></i><i></i><i></i></span> LETTERBOXD FAVORITES. A LITTLE FATE.</div><h1 id="page-title">Good taste. <em>Dumb luck.</em></h1><p>Less scrolling. More cinema.<br class="mobile-only"> Let the wheel choose tonight’s film.</p></div>
+      <div class="intro-note"><span class="sparkle" aria-hidden="true">✳</span><p>For the<br><strong>chronically undecided.</strong></p></div>
+    </section>
+
+    <section class="experience" aria-label="Movie recommendation wheel">
+      <div class="wheel-column">
+        <div class="wheel-topline"><span class="tiny-label">THE WHEEL OF VERY GOOD FILMS</span><span class="wheel-number">NO. <span id="spin-number">001</span></span></div>
+        <div class="wheel-stage" id="wheel-stage"><div class="outer-ring" aria-hidden="true"></div><div class="pointer" aria-hidden="true"><svg viewBox="0 0 38 49"><path d="M1 1h36v19L19 47 1 20z" fill="#f2a76f" stroke="#111b24" stroke-width="2"/><circle cx="19" cy="13" r="4" fill="#111b24"/></svg></div><canvas id="wheel" width="1200" height="1200" aria-label="Movie wheel with twelve film choices"></canvas><button class="wheel-center" id="center-spin" aria-label="Spin the movie wheel"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="M5 15a10 10 0 1 1 2.5 6.6M5 15V6m0 9h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>REEL<br>LUCK</span><small>LET FATE DECIDE</small></button><div class="empty-wheel" id="empty-wheel" hidden><strong>No films in this mix.</strong><span>Try a different mood or clear your filters.</span></div></div>
+        <div class="spin-action"><button class="primary-button" id="spin-button"><span>Spin my next watch</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 14 0m-5-5 5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><p id="wheel-caption">12 films on the wheel. One very good decision.</p></div>
+      </div>
+
+      <div class="control-column">
+        <section class="filters" aria-labelledby="mood-title"><div class="section-heading"><h2 id="mood-title">Set the mood.</h2><button class="text-button" id="reset-filters">Reset</button></div><p>A few preferences. A lot of possibilities.</p><div class="mood-chips" id="mood-chips" aria-label="Film genre"><button class="chip active" aria-pressed="true" data-genre="all">Anything goes <span>✳</span></button><button class="chip" aria-pressed="false" data-genre="Drama">Drama</button><button class="chip" aria-pressed="false" data-genre="Thriller">Thriller</button><button class="chip" aria-pressed="false" data-genre="Comedy">Comedy</button><button class="chip" aria-pressed="false" data-genre="Animation">Animation</button><button class="chip" aria-pressed="false" data-genre="Romance">Romance</button></div><div class="select-row"><label>HOW MUCH TIME?<select id="runtime-select"><option value="all">I have all night</option><option value="120">Under 2 hours</option><option value="90">Under 90 minutes</option><option value="long">Make it an epic (2h+)</option></select></label><label>FROM WHICH ERA?<select id="era-select"><option value="all">Any era</option><option value="classic">Before 1980</option><option value="retro">1980 – 1999</option><option value="modern">2000 onwards</option></select></label></div><div class="filter-bottom"><span><i class="status-dot" aria-hidden="true"></i><strong id="eligible-count">40</strong> films in your mix</span><label class="switch-label"><input type="checkbox" id="no-repeat" checked><span class="switch" aria-hidden="true"></span>No repeat picks</label></div><div class="pool-empty" id="pool-empty" hidden><p id="pool-empty-text">No films match this mix.</p><button class="text-button" id="pool-reset">Reset filters</button></div></section>
+
+        <section class="result-card" id="result-card" aria-labelledby="result-label"><div class="result-label"><span class="tiny-label" id="result-label">YOUR NEXT GREAT WATCH</span><span class="little-star" aria-hidden="true">✧</span></div><div class="result-placeholder" id="result-placeholder"><div class="placeholder-posters" id="placeholder-posters" aria-hidden="true"></div><div class="placeholder-copy"><h2 id="placeholder-title">Your next favorite<br>is a spin away.</h2><p>Handpicked from the films<br>Letterboxd audiences love.</p></div></div><div id="result-content" hidden></div></section>
+        <div class="history-line"><span class="tiny-label">LAST SPIN</span><button id="last-spin-button" class="history-button" disabled>No plot twists yet.</button><button id="clear-history" class="text-button" hidden>Clear</button></div>
+      </div>
+    </section>
+
+    <section class="collection-preview" aria-labelledby="collection-title"><div class="collection-heading"><div><span class="tiny-label">ALL KILLER. NO FILLER.</span><h2 id="collection-title">A little peek at the possibilities.</h2></div><button class="text-button arrow-link" id="browse-bottom">Explore the collection <span aria-hidden="true">↗</span></button></div><div class="poster-shelf" id="poster-shelf"></div></section>
+  </main>
+
+  <footer class="wrap"><a class="footer-brand" href="./">REEL LUCK.</a><p>An independent film picker inspired by <a href="https://letterboxd.com/official/list/letterboxds-top-500-films/" target="_blank" rel="noopener noreferrer">Letterboxd’s top-rated films ↗</a>.<br>Curated selection, not a live ranking. Not affiliated with Letterboxd.</p><span class="footer-note">MADE FOR MOVIE NIGHT.</span></footer>
+
+  <dialog id="collection-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><div><span class="tiny-label" id="dialog-eyebrow">THE VERY GOOD FILM CLUB</span><h2 id="dialog-title">The collection.</h2></div><button class="icon-button close-dialog" aria-label="Close collection"><span aria-hidden="true">×</span></button></div><div class="dialog-tools"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m15 15 5 5" stroke="currentColor" stroke-width="1.7"/></svg><input id="movie-search" type="search" placeholder="Find a film or director…" aria-label="Search films or directors"></label><p id="dialog-count"></p></div><div class="movie-grid" id="movie-grid"></div><div class="dialog-empty" id="dialog-empty" hidden><span aria-hidden="true">✧</span><h3 id="dialog-empty-title">Your watchlist is waiting.</h3><p id="dialog-empty-description">Spin the wheel, then save the films that catch your eye.</p></div></dialog>
+  <dialog id="film-dialog" aria-labelledby="film-detail-title"><div class="film-dialog-close"><button class="icon-button close-dialog" aria-label="Close film details"><span aria-hidden="true">×</span></button></div><div id="film-detail-content"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div><div class="sr-only" id="spin-announcement" role="status" aria-live="polite"></div>
+</body>
+</html>
